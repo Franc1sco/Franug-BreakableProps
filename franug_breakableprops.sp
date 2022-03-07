@@ -20,7 +20,7 @@
 #include <sdktools>
 #include <sdkhooks>
 
-#define PLUGIN_VERSION "0.1"
+#define PLUGIN_VERSION "0.2"
 
 Handle hTimer;
 
@@ -133,7 +133,8 @@ public Action OnTakeDamage(int victim, int &attacker, int &inflictor, float &dam
 			GetClientWeapon(attacker, szWeapon, 32);
 			if (StrContains(szWeapon, "knife", true) == -1 && StrContains(szWeapon, "bayonet", true) == -1)
 			{
-				return Plugin_Handled;
+				damage = 0.0;
+				return Plugin_Changed;
 			}
 			int remaining = GetEntProp(victim, Prop_Data, "m_iHealth") - RoundToNearest(damage);
 			if(remaining > 0) PrintCenterText(attacker, "Prop health remaining: %i",remaining);
